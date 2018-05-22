@@ -23,7 +23,6 @@ namespace ToshinouBot
 
         private MainHandler MainHandler;
 
-
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig()
@@ -42,16 +41,10 @@ namespace ToshinouBot
 
             await _client.LoginAsync(TokenType.Bot, _config["token"]);
             await _client.StartAsync();
-
-
             
             await Task.Delay(-1);
-
-           
         }
-
-
-        //SocketGuildUser user = guild.GetUser(427905551763111950);
+        
         private IServiceProvider ConfigureServices()
         {
             return new ServiceCollection()
