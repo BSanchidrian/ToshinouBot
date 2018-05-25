@@ -36,7 +36,8 @@ namespace ToshinouBot
             services.GetRequiredService<LogService>();
             await services.GetRequiredService<CommandHandlingService>().InitializeAsync(services);
 
-            MainHandler = new MainHandler(_client);
+            // IoC pls D:
+            MainHandler = new MainHandler(_client, new DarkOrbitService());
             await _client.SetGameAsync(null);
 
             await _client.LoginAsync(TokenType.Bot, _config["token"]);
@@ -52,6 +53,7 @@ namespace ToshinouBot
                 .AddSingleton(_client)
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()
+                .AddSingleton<DarkOrbitService>()
                 // Logging
                 .AddLogging()
                 .AddSingleton<LogService>()
@@ -65,7 +67,7 @@ namespace ToshinouBot
         {
             return new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("config.json")
+                .AddJsonFile("config.json", optional: false, reloadOnChange: true)
                 .Build();
         }
     }
