@@ -28,7 +28,7 @@ namespace ToshinouBot.Controllers
                 var updated = await this.darkOrbitService.CheckUpdateAsync();
 
                 if (updated)
-                    await this.SendMessage("Darkorbit updated yoloxd", Toshinou.GeneralEn);
+                    await this.SendMessage("@everyone Darkorbit pushed a new update. Bot is offline!", Toshinou.GeneralNews);
             }, null, 5000, 1000 * 60 * 5); // Checks every 5 mins
         }
 
